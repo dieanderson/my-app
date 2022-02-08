@@ -11,8 +11,8 @@ import Customers from "./pages/Customers"
 
 const App = () => {
   return (
-    <TemplateDefault>
-      <Router>
+    <Router>
+      <TemplateDefault>      
         <Switch>
             <Route exact path={'/'}>
               <TemplatePage title="Home" Component={Home} />
@@ -21,8 +21,8 @@ const App = () => {
                 <TemplatePage title="Clientes" Component={Customers} />
             </Route>
         </Switch>
-      </Router>
-    </TemplateDefault>
+      </TemplateDefault>
+    </Router>    
   )
 }
 

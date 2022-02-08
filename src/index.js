@@ -4,15 +4,15 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import App from './App'
 import './index.css'
-import { red, deepPurple } from '@mui/material/colors'
+import { green } from '@mui/material/colors'
 
 const theme =  createTheme({
   palette: {
     primary:{
-      main: red[900],
+      main: green[400],
     },
     secondary:{
-      main: deepPurple[900]
+      main: green[900],
     } 
   },
 })
