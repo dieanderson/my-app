@@ -17,6 +17,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu'
 import HomeIcon from '@mui/icons-material/Home'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import GroupAddIcon from '@mui/icons-material/GroupAdd'
 
 import useStyles from './Header.style'
 
@@ -66,6 +67,10 @@ const Header = () => {
           </ListItem>
           <ListItem button onClick={ () => { handleMenuClick('/customers') } }>
             <ListItemIcon><PeopleAltIcon /></ListItemIcon>
+            <ListItemText>Lista de Clientes</ListItemText>
+          </ListItem>
+          <ListItem button onClick={ () => { handleMenuClick('/customers/add') } }>
+            <ListItemIcon><GroupAddIcon /></ListItemIcon>
             <ListItemText>Cadastro de Clientes</ListItemText>
           </ListItem>
         </List>
