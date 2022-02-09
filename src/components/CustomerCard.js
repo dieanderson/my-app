@@ -1,3 +1,5 @@
+import React from 'react'
+import { useState } from 'react'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardActions from '@mui/material/CardActions'
@@ -8,7 +10,8 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 
 import ModalConfirm from './ModalConfirm'
-import React from 'react'
+import Toasty from './Toasty'
+
 
 const CustomerCard = ({
     id,
@@ -21,6 +24,12 @@ const CustomerCard = ({
 
     const [openModal, setOpenModal] = React.useState(false)
 
+    const [openToasty, setOpenToasty] = useState({
+        open: false,
+        message: '',
+        severity: '',
+    })
+
     const handleToggleOpenModal = () => {
         setOpenModal(!openModal)
     }
@@ -28,10 +37,16 @@ const CustomerCard = ({
     const handleConfirmModal = (id) => {
         onRemoveCustomer(id)
         handleToggleOpenModal()
+        setOpenToasty({
+            open: true,
+            severity: 'success',
+            message: 'Cliente excluído com sucesso!'
+        })
     }
 
     const handleRemoveCustomer = () => {
         handleToggleOpenModal()
+        
     }
     
     return (
@@ -66,6 +81,13 @@ const CustomerCard = ({
                 onConfirm={ () => handleConfirmModal(id) }
                 title='Deseja realmente excluir este cliente?'
                 message={`${name} ${lastname}`}
+            />
+
+            <Toasty 
+                open={openToasty.open} 
+                severity={openToasty.severity} 
+                message={openToasty.message}
+                onClose={() => setOpenToasty(false)}
             />
         </>
    )

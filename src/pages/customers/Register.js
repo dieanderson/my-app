@@ -4,6 +4,8 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 
+import Toasty from '../../components/Toasty'
+
 const CustomersRegister = () => {
 
     const [form, setForm] = useState({
@@ -16,6 +18,14 @@ const CustomersRegister = () => {
             error: false,
         },
     })
+
+    const [openToasty, setOpenToasty] = useState({
+        open: false,
+        message: '',
+        severity: '',
+    })
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -33,6 +43,7 @@ const CustomersRegister = () => {
         let newFormState = {
            ...form,
        }
+       setIsLoading(true)
         
         if(!form.name.value){
             hasError = true
@@ -59,10 +70,14 @@ const CustomersRegister = () => {
         axios.post('https://reqres.in/api/users', {
             name: form.name.value,
             job: form.job.value,
-        }).then(() => {
-            
+        }).then((response) => {
+            setOpenToasty({
+                open: true,
+                severity: 'success',
+                message: 'Cliente cadastrado com sucesso!'
+            })
+            setIsLoading(false)
         })
-
 
     }
 
@@ -91,9 +106,17 @@ const CustomersRegister = () => {
                 <Button 
                     variant="contained" 
                     onClick={handleRegisterButton}
+                    disabled={isLoading}
                 >
-                    Cadastrar
+                   { isLoading ? 'Aguarde...' : 'Cadastrar'}
                 </Button>
+
+                <Toasty 
+                    open={openToasty.open} 
+                    severity={openToasty.severity} 
+                    message={openToasty.message}
+                    onClose={() => setOpenToasty(false)}
+                />
 
             </Stack>           
        
