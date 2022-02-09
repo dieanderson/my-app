@@ -13,7 +13,7 @@ const CustomersRegister = () => {
             value: '',
             error: false,
         },
-        job: {
+        email: {
             value: '',
             error: false,
         },
@@ -54,12 +54,12 @@ const CustomersRegister = () => {
             }    
         }
 
-        if(!form.job.value){
+        if(!form.email.value){
             hasError = true
-            newFormState.job = {
-                value: form.job.value,
+            newFormState.email = {
+                value: form.email.value,
                 error: true,
-                helperText: 'Informe o cargo corretamente!',
+                helperText: 'Informe o e-mail corretamente!',
             }
         }
 
@@ -69,7 +69,7 @@ const CustomersRegister = () => {
 
         axios.post('https://reqres.in/api/users', {
             name: form.name.value,
-            job: form.job.value,
+            email: form.email.value,
         }).then((response) => {
             setOpenToasty({
                 open: true,
@@ -95,11 +95,11 @@ const CustomersRegister = () => {
                 />
                 
                 <TextField 
-                    label="Digite o seu cargo" 
-                    error={form.job.error} 
-                    helperText={form.job.error ? form.job.helperText : ''} 
-                    value={form.job.value} 
-                    name="job" 
+                    label="Digite o seu e-mail" 
+                    error={form.email.error} 
+                    helperText={form.email.error ? form.email.helperText : ''} 
+                    value={form.email.value} 
+                    name="email" 
                     onChange={handleInputChange}
                 />
 

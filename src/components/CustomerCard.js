@@ -20,6 +20,7 @@ const CustomerCard = ({
     email,
     avatar,
     onRemoveCustomer,
+    onEditCustomer,
 }) => {
 
     const [openModal, setOpenModal] = React.useState(false)
@@ -48,6 +49,10 @@ const CustomerCard = ({
         handleToggleOpenModal()
         
     }
+
+    const handleEditCustomer = (id) => {
+        onEditCustomer(id)
+    }
     
     return (
         <>
@@ -65,7 +70,7 @@ const CustomerCard = ({
                 />            
                 
                 <CardActions disableSpacing>
-                    <IconButton aria-label="Editar Cadastro">
+                    <IconButton aria-label="Editar Cadastro" onClick={ () => handleEditCustomer(id)}>
                         <EditIcon />
                     </IconButton>
                     <IconButton aria-label="Remover Cadastro" onClick={handleRemoveCustomer}>
