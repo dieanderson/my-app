@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useHistory } from "react-router-dom"
+import { useNavigate} from "react-router-dom"
 import axios from "axios"
 import { Grid } from "@mui/material"
 import CustomerCard from "../../components/CustomerCard"
@@ -7,7 +7,7 @@ import CustomerCard from "../../components/CustomerCard"
 
 const CustomersList = () => {
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const [customers, setCustomers] = useState([])
 
@@ -31,7 +31,7 @@ const CustomersList = () => {
     }
 
     const handleEditCustomer = (id) => {
-        history.push(`customers/edit/${id}`)
+        navigate(`edit/${id}`)
     }
 
     return (

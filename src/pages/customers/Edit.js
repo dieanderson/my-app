@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
@@ -11,7 +11,7 @@ const CustomersEdit = () => {
 
     const { id } = useParams()
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const [openToasty, setOpenToasty] = useState({
         open: false,
@@ -50,8 +50,7 @@ const CustomersEdit = () => {
             })
         })        
         
-    }, []) 
-       
+    })        
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -109,7 +108,7 @@ const CustomersEdit = () => {
     }
 
     const handleReturnButton = () => {        
-        history.goBack()
+        navigate(-1)
     }
 
     return(

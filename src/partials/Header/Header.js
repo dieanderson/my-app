@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { 
   AppBar,
   Box,
@@ -19,11 +19,8 @@ import HomeIcon from '@mui/icons-material/Home'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 import GroupAddIcon from '@mui/icons-material/GroupAdd'
 
-import useStyles from './Header.style'
-
-const Header = () => {
-  const classes = useStyles()
-  const history = useHistory()
+const Header = ({user}) => {
+  const navigate = useNavigate()
 
   const [menuOpen, setMenuOpen] = React.useState(false)
 
@@ -32,10 +29,10 @@ const Header = () => {
   }
 
   const handleMenuClick = (route) => {
-    history.push(route)
+    navigate(route)
     handleToggleMenu()
   }
-
+  console.log(user)
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -51,10 +48,14 @@ const Header = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" className={classes.title} component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, marginLeft: "10px" }}>
               My App
             </Typography>
-            <Button color="inherit">Login</Button>
+            {
+              user.logged 
+              ? <Typography variant='h6'>{user.email}</Typography> 
+              : <Button color="inherit">Login</Button>
+            } 
           </Toolbar>
         </AppBar>
       </Box>

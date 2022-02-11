@@ -1,10 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render }from 'react-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import App from './App'
 import './index.css'
 import { green } from '@mui/material/colors'
+
+import { AuthProvider } from './state/auth'
 
 const theme =  createTheme({
   palette: {
@@ -17,12 +19,14 @@ const theme =  createTheme({
   },
 })
 
+const rootElement = document.getElementById("root")
 
-ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>   
-  </React.StrictMode>,
-  document.getElementById('root')
-)
+render(  
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
+            <App />
+        </AuthProvider>
+      </ThemeProvider>   
+    </React.StrictMode>
+  , rootElement )

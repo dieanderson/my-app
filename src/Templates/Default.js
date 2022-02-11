@@ -1,24 +1,24 @@
-import Container from '@mui/material/Container'
-import { makeStyles } from '@material-ui/core/styles'
+import { 
+    Container,
+    Box, 
+} from '@mui/material'
 
 import Header from "../partials/Header/Header"
+import useAuth from '../state/auth'
 
-const useStyles = makeStyles( () =>({
-    container: {
-      padding: '15px 0'
-    },
-}))
-
-const Default = ({children}) => {
-    const classes = useStyles()
+const Default = ({children}) => {    
+    const { user } = useAuth()
 
     return(
         <>
-            <Header />
-            <Container className={classes.container}>
-                {children}
-            </Container>
+            <Header user={user} />
+            <Box sx={{ padding: "15px 0"}}>
+                <Container>
+                    {children}
+                </Container>
+            </Box>
         </>
+        
     )
 }
 

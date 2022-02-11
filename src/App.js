@@ -1,8 +1,10 @@
 import {
-  BrowserRouter as Router,
-  Switch,
+  BrowserRouter,
+  Routes,
   Route,
 } from "react-router-dom"
+
+import { Fragment } from "react"
 
 import TemplateDefault from './templates/Default'
 import TemplatePage from './templates/Page'
@@ -15,27 +17,53 @@ import Login from "./pages/Login"
 
 const App = () => {
   return (
-    <Router>            
-      <Switch> 
-        <Route path={'/login'}>
-            <TemplateClean title="Acesso Restrito" Component={Login} />
-        </Route>
-        <TemplateDefault>
-          <Route path={'/customers/edit/:id'}>
-              <TemplatePage title="Editar Cliente" Component={CustomersEdit} />
-          </Route>   
-          <Route path={'/customers/add'}>
-              <TemplatePage title="Cadastro de Clientes" Component={CustomersRegister} />
-          </Route>         
-          <Route path={'/customers'}>
-              <TemplatePage title="Lista de Clientes" Component={CustomersList} />
-          </Route>            
-          <Route path={'/'}>
-            <TemplatePage title="Página Inicial" Component={Home} />
-          </Route>
-        </TemplateDefault>
-      </Switch>      
-    </Router>    
+    <div>
+      <BrowserRouter> 
+        <Fragment>        
+          <Routes>          
+
+            <Route exact path="/" 
+              element={
+                <TemplateDefault> 
+                  <TemplatePage title="Página Inicial" Component={Home} /> 
+                </TemplateDefault>
+              } 
+            />
+
+            <Route path="/customers" 
+              element={
+                <TemplateDefault> 
+                  <TemplatePage title="Lista de Clientes" Component={CustomersList} /> 
+                </TemplateDefault>
+              } 
+            /> 
+
+            <Route path="/customers/add" 
+              element={
+                <TemplateDefault> 
+                  <TemplatePage title="Cadastro de Clientes" Component={CustomersRegister} /> 
+                </TemplateDefault>
+              } 
+            />
+            
+            <Route path="/customers/edit/:id" 
+              element={
+                <TemplateDefault> 
+                  <TemplatePage title="Editar Cliente" Component={CustomersEdit} /> 
+                </TemplateDefault>
+              } 
+            />
+
+            <Route path="/login" 
+              element={
+                <TemplateClean title="Acesso Restrito" Component={Login} />
+              } 
+            />
+            
+          </Routes>
+        </Fragment> 
+      </BrowserRouter>         
+    </div>
   )
 }
 
